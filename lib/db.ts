@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER || "mentor_user",
   password: process.env.DB_PASSWORD || "mentor_password",
   database: process.env.DB_NAME || "mentorship",
-  synchronize: process.env.NODE_ENV !== "production",
+  synchronize: process.env.DB_SYNC === "true" || process.env.NODE_ENV !== "production",
   logging: false, // Turn off verbose logs to reduce noise
   entities: [User, Match, Session, Notification, Recommendation],
   ssl: process.env.DB_SSL === "true" ? {
