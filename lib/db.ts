@@ -16,8 +16,11 @@ export const AppDataSource = new DataSource({
   synchronize: process.env.NODE_ENV !== "production",
   logging: false, // Turn off verbose logs to reduce noise
   entities: [User, Match, Session, Notification, Recommendation],
+  ssl: process.env.DB_SSL === "true" ? {
+    rejectUnauthorized: false
+  } : undefined,
   extra: {
-    connectionLimit: 5,
+    connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || "5", 10),
     waitForConnections: true,
     connectTimeout: 10000,
   }
